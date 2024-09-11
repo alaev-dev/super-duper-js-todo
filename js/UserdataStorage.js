@@ -1,6 +1,7 @@
 export class UserdataStorage {
   constructor() {
     this.username = null;
+    this.todos = [];
 
     this.loadFromLocalStorage();
 
@@ -18,6 +19,19 @@ export class UserdataStorage {
     this.username = username;
   }
 
+  addTodo(todo) { 
+    if (!this.todos.includes(todo)) {
+      this.todos.push(todo)
+    }
+  }
+
+  removeTodo(todo) {
+    const index = this.todos.indexOf(todo)
+    if (index > -1) {
+      this.todos.splice(index, 1);
+    }
+  }
+
   // Метод для получения имени пользователя
   getUsername() {
     if (this.username === null) {
@@ -29,22 +43,21 @@ export class UserdataStorage {
   // Метод для загрузки имени пользователя из localStorage
   loadFromLocalStorage() {
     const storedUsername = localStorage.getItem('username');
+    
     if (storedUsername) {
       this.username = storedUsername;
     }
+
+    const todosFromStorage = localStorage.getItem('todos');
+    this.todos = todosFromStorage ? JSON.parse(todosFromStorage) : [];
   }
 
   // Метод для записи имени пользователя в localStorage
   saveToLocalStorage() {
     if (this.username !== null) {
       localStorage.setItem('username', this.username);
+      localStorage.setItem('todos', JSON.stringify(this.todos));
     }
-  }
-
-  // Метод для очистки имени пользователя и удаления его из localStorage
-  clearUsername() {
-    this.username = null;
-    localStorage.removeItem('username');
   }
 
   // Метод для проверки, что имени нет в localStorage

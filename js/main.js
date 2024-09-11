@@ -1,12 +1,19 @@
-import { UserdataStorage } from './UserdataStorage.js';
+import { PageFactory } from './PageFactory.js'; 
 
-const loginForm = document.getElementById('input-form')
+const pageFactory = PageFactory.createInstance();
 
-const storage = new UserdataStorage();
-storage.isUsernameInLocalStorage(); //true or false
+const init = () => {
+    const page = pageFactory.init()
+    page.render();
+}
 
-loginForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const username = document.getElementById('fname').value;
-    storage.setUsername(username);
-});
+const createJournalPage = () => {
+    const page = pageFactory.createJournalPage()
+
+    page.render();
+}
+
+// Handle login success event
+document.addEventListener('loginSuccess', createJournalPage);
+
+window.addEventListener('load', init);

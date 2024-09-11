@@ -1,0 +1,55 @@
+body {
+  font-size: 3vw;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.center-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  margin: 0;
+}
+
+.input-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-form input[type="text"],
+.input-form input[type="submit"] {
+  padding: 10px;
+}
+
+.greetings {
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    width: 50%;
+  }
+
+  .input-form {
+    flex-direction: row;
+  }
+
+  .input-form input[type="text"],
+  .input-form input[type="submit"] {
+    width: auto;
+    flex: 1;
+  }
+
+  .input-form input[type="submit"] {
+    width: auto;
+  }
+}
